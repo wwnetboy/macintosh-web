@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>hello. — Macintosh 麦金塔 3D 复古个人网站</title>
+    <meta
+      name="description"
+      content="用 Three.js 打造的 Macintosh 麦金塔 3D 复古个人网站。滚动探索书桌，打开 CRT 像素桌面，浏览个人档案、写便笺，或插入光盘播放视频。"
+    />
+    <meta name="author" content="Vcore" />
+    <meta name="theme-color" content="#060608" />
+    <meta name="color-scheme" content="dark" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="hello. — Macintosh 麦金塔 3D 复古个人网站" />
+    <meta
+      property="og:description"
+      content="用 Three.js 打造的 Macintosh 麦金塔 3D 复古个人网站。滚动探索书桌，打开 CRT 像素桌面，浏览个人档案、写便笺，或插入光盘播放视频。"
+    />
+
+    <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
+
+    <link rel="stylesheet" href="/src/styles/main.css" />
+  </head>
+  <body>
+    <canvas id="stage" aria-hidden="true"></canvas>
+    <div class="screen-grain" aria-hidden="true"></div>
+    <div class="screen-vignette" aria-hidden="true"></div>
+
+    <main id="page">
+      <noscript>
+        <section class="chapter">
+          <div class="chapter-inner in">
+            <h2 class="chapter-title">这台机器需要 JavaScript 才能开机</h2>
+            <p class="chapter-lead">
+              页面上是一台 1984 年的 Macintosh，所有画面都由 three.js 实时计算。
+              打开 JavaScript 之后再刷新，就能看到它亮起来。
+            </p>
+          </div>
+        </section>
+      </noscript>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

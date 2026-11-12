@@ -1,0 +1,234 @@
+/* Ported from isww/src/liquid-glass.css, based on rdev/liquid-glass-react (MIT). */
+.liquid-glass-defs {
+  position: absolute;
+  pointer-events: none;
+}
+.liquid-glass:is(button, a, dialog, aside) {
+  --glass-x: 0px;
+  --glass-y: 0px;
+  --glass-scale-x: 1;
+  --glass-scale-y: 1;
+  --glass-light-x: 50%;
+  --glass-light-y: 0%;
+  --glass-angle: 135deg;
+  --glass-motion-duration: 320ms;
+  --glass-motion-easing: cubic-bezier(0.22, 1.5, 0.36, 1);
+  --glass-press-duration: 120ms;
+  isolation: isolate;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.045);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.22),
+    inset 0 1px 1px rgba(255, 255, 255, 0.45),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.13),
+    inset 1px 0 1px rgba(255, 255, 255, 0.16);
+  transform: translate(var(--glass-x), var(--glass-y))
+    scale(var(--glass-scale-x), var(--glass-scale-y));
+  transition:
+    transform var(--glass-motion-duration) var(--glass-motion-easing),
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+button.liquid-glass,
+a.liquid-glass {
+  position: relative;
+}
+.liquid-glass__surface {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+  background: rgba(12, 16, 14, 0.18);
+}
+.liquid-glass__surface > span {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  backdrop-filter: blur(var(--glass-blur, 8px))
+    saturate(var(--glass-saturation, 145%));
+  -webkit-backdrop-filter: blur(var(--glass-blur, 8px))
+    saturate(var(--glass-saturation, 145%));
+  filter: var(--liquid-filter, none);
+}
+.liquid-glass::before,
+.liquid-glass::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.liquid-glass::before {
+  z-index: 1;
+  padding: 1.5px;
+  background: linear-gradient(
+    var(--glass-angle),
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.06) 28%,
+    rgba(255, 255, 255, 0.08) 58%,
+    rgba(255, 255, 255, 0.6) 82%,
+    rgba(255, 255, 255, 0.1)
+  );
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+}
+.liquid-glass::after {
+  z-index: -1;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at var(--glass-light-x) var(--glass-light-y),
+    rgba(255, 255, 255, 0.22),
+    transparent 65%
+  );
+  opacity: 0.4;
+  transition: opacity 180ms ease;
+}
+.liquid-glass:is(:hover, :focus-within) {
+  border-color: rgba(255, 255, 255, 0.44);
+  background: rgba(255, 255, 255, 0.07);
+}
+.liquid-glass:is(:hover, :focus-within)::after {
+  opacity: 0.85;
+}
+.liquid-glass.is-glass-pressed {
+  transform: translate(var(--glass-x), var(--glass-y))
+    scale(var(--glass-press-scale-x, 0.965), var(--glass-press-scale-y, 0.965));
+  transition-duration: var(--glass-press-duration);
+}
+.liquid-glass.is-glass-pressed::after {
+  opacity: 1;
+}
+.liquid-glass[aria-expanded='true'],
+.liquid-glass[aria-pressed='true'] {
+  background: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.58);
+  color: #fff;
+}
+.liquid-glass.liquid-glass--card {
+  overflow: hidden;
+  padding: 0;
+  border-radius: var(--glass-corner-radius, 32px);
+  background: rgba(255, 255, 255, 0.055);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.25),
+    0 24px 70px rgba(0, 0, 0, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 0.45),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.12);
+}
+.liquid-glass--card > .liquid-glass__surface {
+  background: rgba(10, 14, 12, 0.32);
+}
+.liquid-glass--card > .liquid-glass__content {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--glass-padding, 12px);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+.site-menu.liquid-glass {
+  transform-origin: top right;
+}
+.site-menu.liquid-glass[open] {
+  animation: none;
+}
+.site-menu.liquid-glass::backdrop {
+  background: rgba(0, 0, 0, 0.18);
+  backdrop-filter: none;
+}
+.site-menu.liquid-glass > .liquid-glass__content {
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: column;
+  padding: 16px;
+}
+.site-menu .liquid-glass__surface > span,
+.site-menu > .liquid-glass__content {
+  transition: opacity 160ms ease;
+}
+.site-menu.is-glass-closing .liquid-glass__surface > span,
+.site-menu.is-glass-closing > .liquid-glass__content {
+  opacity: 0;
+}
+.site-menu nav {
+  gap: 2px;
+}
+.menu-heading {
+  border-bottom-color: rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.65);
+}
+.menu-close.liquid-glass {
+  flex-shrink: 0;
+  font-size: 24px;
+}
+.menu-toggle.liquid-glass {
+  width: 46px;
+  height: 46px;
+}
+.sound-btn.liquid-glass,
+.language-toggle.liquid-glass {
+  width: 46px;
+  height: 46px;
+  min-height: 46px;
+  padding: 0;
+}
+.primary-btn.liquid-glass {
+  padding: 0 26px;
+  background: rgba(255, 255, 255, 0.1);
+}
+.text-link.liquid-glass,
+.work-action.liquid-glass,
+.chapter-links a.liquid-glass,
+.loader-skip.liquid-glass {
+  padding: 0 18px;
+  min-height: 44px;
+}
+.tip,
+.toast {
+  border-color: rgba(255, 255, 255, 0.24);
+  border-radius: 18px;
+  background: rgba(22, 28, 25, 0.55);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.32),
+    0 12px 32px #0003;
+}
+.failure-notice.liquid-glass > .liquid-glass__content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+@media (max-width: 520px) {
+  .menu-toggle.liquid-glass {
+    width: 44px;
+    height: 44px;
+  }
+  .sound-btn.liquid-glass,
+  .language-toggle.liquid-glass {
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .liquid-glass,
+  .liquid-glass.is-glass-pressed {
+    transform: none !important;
+    transition: none;
+  }
+}

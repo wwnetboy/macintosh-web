@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
+  <title>开机笑脸</title>
+  <rect width="25" height="25" rx="4" fill="#fff" />
+  <!-- Same pixels as HAPPY_FACE_BITMAP in src/scene/CrtScreen.js, offset by (3, 4). -->
+  <path fill="#000" shape-rendering="crispEdges" d="
+    M3 4h2v1h-2z M12 4h2v1h-2z M20 4h2v1h-2z
+    M3 5h2v1h-2z M12 5h2v1h-2z M20 5h2v1h-2z
+    M3 6h2v1h-2z M12 6h2v1h-2z M20 6h2v1h-2z
+    M3 7h2v1h-2z M12 7h2v1h-2z M20 7h2v1h-2z
+    M12 8h2v1h-2z M12 9h2v1h-2z
+    M12 10h2v1h-2z M12 11h2v1h-2z
+    M10 12h4v1h-4z M10 13h4v1h-4z
+    M5 16h2v1h-2z M18 16h2v1h-2z
+    M5 17h3v1h-3z M17 17h3v1h-3z
+    M6 18h4v1h-4z M15 18h4v1h-4z
+    M8 19h9v1h-9z M10 20h5v1h-5z
+  " />
+</svg>

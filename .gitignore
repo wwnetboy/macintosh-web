@@ -1,0 +1,26 @@
+# Dependencies and generated build files
+node_modules/
+/dist/
+.vite/
+
+# Local experiments, historical screenshots and test output
+/output/
+/dev/
+/inspect.html
+/coverage/
+/playwright-report/
+/test-results/
+*.log
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.local
+.edgeone/
+
+# Editor and operating system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
